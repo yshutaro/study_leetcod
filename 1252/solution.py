@@ -2,13 +2,23 @@ class Solution:
     def oddCells(self, n: int, m: int, indices: [[int]]) -> int:
       result = 0
       matrix = [[0 for i in range(n)] for j in range(m)]
+      #print("matrix step0:",  matrix) 
 
       for index in indices:
+
         row = index[0]  
         col = index[1]
+        #print(row)
+        #print(col)
 
-        [[m[row] + 1, m[1]] for m in matrix]
-
+        for mat in matrix:
+          mat[row] = mat[row] + 1
+        #print("matrix_step1:", matrix)
+        matrix = [[ mat + 1 for mat in val] if ind == col else val for ind, val in enumerate(matrix)]
+      
+      #print("matrix:",  matrix) 
+      result = sum([len(list(filter(lambda x:x%2==1,m))) for m in matrix])
+      #print("result:", result)
       return result
 
 if __name__ == '__main__':
